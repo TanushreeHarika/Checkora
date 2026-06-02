@@ -362,8 +362,6 @@ jobs:
         with:
           path: staticfiles/
           key: static-${{ runner.os }}-${{ hashFiles('game/static/**', 'templates/**') }}
-          restore-keys: |
-            static-${{ runner.os }}-
 
       - name: 📦 Collect static files
         if: steps.static-cache.outputs.cache-hit != 'true'
