@@ -252,7 +252,8 @@ body {
     max-width: 100%;
     margin: 0 auto;
     overflow-x: hidden;
-    box-sizing: border-box;
+    box-sizing: content-box;
+
 }
 
 .panel {
@@ -1392,6 +1393,7 @@ body {
         right: 12px;
         z-index: 10000;
     }
+}}
 .m-fab-btn {
     width: 44px;
     height: 44px;
@@ -1478,7 +1480,8 @@ body {
         padding: 8px 4px 16px;
         gap: 12px;
         overflow-x: hidden;
-        box-sizing: border-box;
+        box-sizing: content-box;
+
     }
 
     .panel {
