@@ -71,4 +71,69 @@ class PuzzleStats(models.Model):
     def __str__(self):
         return f"{self.user.username} Puzzle Stats"
     
+class LessonProgress(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="lesson_progress"
+    )
+
+    lesson_name = models.CharField(
+        max_length=100
+    )
+
+    completed = models.BooleanField(
+        default=False
+    )
+
+    completed_at = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        unique_together = (
+            "user",
+            "lesson_name"
+        )
+
+    def __str__(self):
+        return (
+            f"{self.user.username} - "
+            f"{self.lesson_name}"
+        )
+        
+class Achievement(models.Model):
+    code = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    icon = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.title
+
+
+class UserAchievement(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    achievement = models.ForeignKey(
+        Achievement,
+        on_delete=models.CASCADE
+    )
+
+    unlocked_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        unique_together = (
+            "user",
+            "achievement"
+        )
+
+    def __str__(self):
+        return f"{self.user.username} - {self.achievement.title}"
     
