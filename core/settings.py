@@ -14,6 +14,7 @@ import os
 import dj_database_url
 from pathlib import Path
 from dotenv import load_dotenv
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +36,16 @@ if IS_PRODUCTION:
 else:
     DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['.vercel.app', '*']
+ALLOWED_HOSTS = ['.vercel.app']
+
+if DEBUG or not IS_PRODUCTION:
+    ALLOWED_HOSTS.extend(['localhost', '127.0.0.1'])
+
+# Add extra domains from ALLOWED_HOSTS_EXTRA environment variable
+extra_hosts = [host.strip() for host in os.environ.get('ALLOWED_HOSTS_EXTRA', '').split(',') if host.strip()]
+if '*' in extra_hosts:
+    raise ImproperlyConfigured("ALLOWED_HOSTS_EXTRA must not contain '*'")
+ALLOWED_HOSTS.extend(extra_hosts)
 
 
 # Application definition
@@ -131,8 +141,6 @@ USE_TZ = True
 # In production, we require a shared cache backend (e.g., DatabaseCache
 # or Redis). LocMemCache is per-process and can bypass login lockouts
 # in multi-worker environments.
-from django.core.exceptions import ImproperlyConfigured
-
 cache_backend = os.environ.get(
     'CACHE_BACKEND',
     'django.core.cache.backends.db.DatabaseCache' if IS_PRODUCTION
