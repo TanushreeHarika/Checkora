@@ -996,6 +996,7 @@ class AIMoveTest(TestCase):
 
 class OpeningBookTest(SimpleTestCase):
     """Unit tests for the opening-book integration in ChessGame."""
+    
     # FEN key generation
 
     def test_fen_key_starting_position(self):
@@ -1031,9 +1032,7 @@ class OpeningBookTest(SimpleTestCase):
         # Ranks 3-6 (0-indexed 2-5) are empty at start → four '8' segments
         self.assertIn('/8/', key)
 
-    # ------------------------------------------------------------------
     # Book loading
-    # ------------------------------------------------------------------
 
     def test_book_loads_from_json_file(self):
         """The book file must be loadable and return a non-empty dict."""
@@ -1062,9 +1061,7 @@ class OpeningBookTest(SimpleTestCase):
         # Restore so other tests use the real book
         ChessGame._opening_book = None
 
-    # ------------------------------------------------------------------
     # get_opening_book_move
-    # ------------------------------------------------------------------
 
     def test_starting_position_returns_book_move(self):
         """At the start of the game a valid book move should be returned."""
@@ -1179,9 +1176,7 @@ class OpeningBookTest(SimpleTestCase):
             'Book should produce variety across 60 calls')
         ChessGame._opening_book = None
 
-    # ------------------------------------------------------------------
     # Integration: get_ai_move uses book on first move
-    # ------------------------------------------------------------------
 
     def test_get_ai_move_uses_book_before_engine(self):
         """get_ai_move() must use the book first."""
