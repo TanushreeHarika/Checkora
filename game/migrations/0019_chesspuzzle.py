@@ -68,7 +68,7 @@ def reverse_seed_puzzles(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('game', '0016_alter_userprogress_level_alter_userprogress_xp'),
+        ('game', '0018_playerrating_games_played_matches_results'),
     ]
 
     operations = [

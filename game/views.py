@@ -58,6 +58,8 @@ from .models import (
     FeaturedBadge,
     UserProgress,
     ChessPuzzle,
+    PlayerRating,
+    RatingHistory,
 )
 
 from .rating_service import calculate_rating_change
