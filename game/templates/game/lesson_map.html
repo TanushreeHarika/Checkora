@@ -346,7 +346,7 @@ background-size:60px 60px;
             <a href="{% url 'login' %}" class="alert-link">Sign in</a> or <a href="{% url 'register' %}" class="alert-link">create a free account</a> to save your lesson progress.
         </span>
     </div>
-    <button class="alert-close" onclick="dismissAlert()" aria-label="Close message">&times;</button>
+    <button class="alert-close" type="button" onclick="dismissAlert()" aria-label="Close message">&times;</button>
 </div>
 {% endif %}
 
