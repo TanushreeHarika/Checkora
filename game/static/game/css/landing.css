@@ -2523,6 +2523,16 @@ body {
     color: #111827;
 }
 
+/* Keep question text dark and readable on hover in Light Mode */
+[data-theme="light"] .faq-item:hover .faq-question {
+    color: #111827;
+}
+
+/* Subtle warm tint on hover that doesn't wash out the text */
+[data-theme="light"] .faq-item:hover {
+    background: rgba(212, 160, 23, 0.06);
+}
+
 [data-theme="light"] .faq-answer-content {
     color: #374151;
 }
